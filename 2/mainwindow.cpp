@@ -2,10 +2,13 @@
 #include "ui_mainwindow.h"
 
 #include <QFileDialog>
+#include <QListWidgetItem>
+#include <QDialogButtonBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
+
 {
     ui->setupUi(this);
 }
@@ -35,7 +38,22 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_buttonBox_accepted()
 {
-    QListWidgetItem* fname = ui->listWidget->selectedItems().at(0);
+    QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Save | QDialogButtonBox::Open | QDialogButtonBox::Close);
+
+         connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+         {
+             QListWidgetItem* fname = ui->listWidget->selectedItems().at(0);
+             QString quotedFname = "cmd /c \"" + fname->text() + "\"";
+             system( quotedFname.toStdString().c_str() );
+         }
+         connect(buttonBox, SIGNAL(close()), this, SLOT(close()));
+         {
+
+         }
+
+    /*  QListWidgetItem* fname = ui->listWidget->selectedItems().at(0);
     QString quotedFname = "cmd /c \"" + fname->text() + "\"";
-    system( quotedFname.toStdString().c_str() );
+    system( quotedFname.toStdString().c_str() );        */
 }
+
+

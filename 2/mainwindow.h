@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QListWidget>
+#include <QListWidgetItem>
+#include <QDialogButtonBox>
 
 namespace Ui {
 class MainWindow;
@@ -24,7 +27,7 @@ private slots:
 
   void on_buttonBox_accepted();
 
-private:
+    private:
     Ui::MainWindow *ui;
 };
 
