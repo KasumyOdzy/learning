@@ -4,6 +4,10 @@
 #include <QFileDialog>
 #include <QListWidgetItem>
 #include <QDialogButtonBox>
+#include <QAction>
+#include <QKeySequence>
+#include <QTextStream>
+#include <QTextStream>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -15,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-    delete ui;
+        delete ui;
 }
 
 void MainWindow::on_toolButton_clicked()
@@ -29,31 +33,28 @@ void MainWindow::on_pushButton_2_clicked()
     auto fname = ui->lineEdit->text();
     auto item = new QListWidgetItem(fname);
     ui->listWidget->addItem(item);
+    QFile mfile("//mfile.txt");
+    QTextStream stream(&mfile);
+    stream << ui->lineEdit->toPlainText();
+    mfile close();
+
 }
 
 void MainWindow::on_pushButton_clicked()
 {
-    ; //
+   /* auto item = ui->listWidget->fname();
+    auto fname = new QListWidgetItem(item);
+    ui->listWidget->deleteLater();*/
 }
 
-void MainWindow::on_buttonBox_accepted()
+void MainWindow::on_pushButton_3_clicked()
 {
-    QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Save | QDialogButtonBox::Open | QDialogButtonBox::Close);
-
-         connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-         {
-             QListWidgetItem* fname = ui->listWidget->selectedItems().at(0);
-             QString quotedFname = "cmd /c \"" + fname->text() + "\"";
-             system( quotedFname.toStdString().c_str() );
-         }
-         connect(buttonBox, SIGNAL(close()), this, SLOT(close()));
-         {
-
-         }
-
-    /*  QListWidgetItem* fname = ui->listWidget->selectedItems().at(0);
+    QListWidgetItem* fname = ui->listWidget->selectedItems().at(0);
     QString quotedFname = "cmd /c \"" + fname->text() + "\"";
-    system( quotedFname.toStdString().c_str() );        */
+    system( quotedFname.toStdString().c_str() );
 }
 
-
+void MainWindow::on_pushButton_4_clicked()
+{
+    close();
+}

@@ -5,6 +5,8 @@
 #include <QListWidget>
 #include <QListWidgetItem>
 #include <QDialogButtonBox>
+#include <QAction>
+#include <QKeySequence>
 
 namespace Ui {
 class MainWindow;
@@ -25,9 +27,13 @@ private slots:
 
   void on_pushButton_clicked();
 
-  void on_buttonBox_accepted();
+  void on_pushButton_3_clicked();
 
-    private:
+  void on_pushButton_4_clicked();
+
+  void on_actionRead_triggered();
+
+private:
     Ui::MainWindow *ui;
 };
 
